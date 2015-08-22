@@ -1,7 +1,9 @@
 NAME = 'DIY Network'
 PREFIX = '/video/diy'
-BASE_URL = 'http://www.diynetwork.com'
+ART = 'art-default.jpg'
+ICON = 'icon-default.png'
 
+BASE_URL = 'http://www.diynetwork.com'
 FULLEP_URL = 'http://www.diynetwork.com/shows/full-episodes'
 SHOW_LINKS_URL = 'http://www.diynetwork.com/shows/shows-a-z'
 
@@ -11,6 +13,8 @@ SMIL_NS = {'a': 'http://www.w3.org/2005/SMIL21/Language'}
 def Start():
 
     ObjectContainer.title1 = NAME
+    ObjectContainer.art = R(ART)
+    DirectoryObject.thumb = R(ICON)
     HTTP.CacheTime = CACHE_1HOUR
 
 ####################################################################################################
