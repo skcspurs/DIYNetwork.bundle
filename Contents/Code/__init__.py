@@ -35,20 +35,18 @@ def FullEpMenu(title):
 
     oc = ObjectContainer(title2=title)
 
-    for item in HTML.ElementFromURL(FULLEP_URL).xpath('//div[@class="parbase editorialPromo section"]//ul/li'):
-
-        title = item.xpath('.//h4/a/text()')[0]
-        try: summary = item.xpath('.//h4/a/span//text()')[0]
-        except: summary = ''
-        thumb = item.xpath('./div[@class="media"]/a/img/@src')[0]
-        url = item.xpath('./div[@class="media"]/a/@href')[0]
-
-        oc.add(DirectoryObject(
-            key = Callback(VideoBrowse, url=url, title=title),
-            title = title,
-            summary = summary,
-            thumb = Resource.ContentsOfURLWithFallback(url=thumb)
+    for item in HTML.ElementFromURL(FULLEP_URL).xpath('//div[@class="page-body"]//div[contains(@class, "MediaBlock o-Capsule")]'): 
+        url = item.xpath('.//a/@href')[0] 
+        title = item.xpath('.//h4//span/text()')[0].strip() 
+        thumb = item.xpath('.//img/@data-src')[0] 
+     
+     
+        oc.add(DirectoryObject( 
+             key = Callback(VideoBrowse, url=url, title=title), 
+             title = title, 
+             thumb = Resource.ContentsOfURLWithFallback(url=thumb) 
         ))
+
 
     # sort shows in alphabetical order here
     oc.objects.sort(key=lambda obj: obj.title)
