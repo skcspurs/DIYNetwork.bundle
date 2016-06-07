@@ -147,7 +147,7 @@ def VideoBrowse(url, title):
 
     # To prevent any issues with URLs that do not contain the video playlist json, we put the json pull in a try/except
     try:
-        json_data = page.xpath('//div[@class="video-player-container"]/@data-video-prop')[0]
+        json_data = page.xpath('//div[contains(@class, "video-player")]//script/text()')[0].strip()
         json = JSON.ObjectFromString(json_data)
     except:
         json = None
